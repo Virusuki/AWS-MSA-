@@ -17,4 +17,5 @@ channel.basic_consume(queue='order', on_message_callback=callback)
 print('Started consuming')
 
 channel.start_consuming()
+
 channel.close()
