@@ -3,12 +3,15 @@ from .models import Shop, Order
 from .serializers import ShopSerializer, OrderSerializer
 from rest_framework.response import Response
 
+from .producer import publish
+
 #from .producer import publish
 
 class ShopViewSet(viewsets.ViewSet):
     def list(self, request):  #/api/shop
         shops = Shop.objects.all()
         serializer = ShopSerializer(shops, many=True)
+        publish()
         return Response(serializer.data)
 
     def create(self, request):  #/api/shop
@@ -40,6 +43,7 @@ class OrderViewSet(viewsets.ViewSet):
     def list(self, request):  #/api/order
         orders = Order.objects.all()
         serializer = OrderSerializer(orders, many=True)
+        #publish()
         return Response(serializer.data)
 
     def create(self, request):  #/api/order
